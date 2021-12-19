@@ -1,0 +1,18 @@
+name: frontend build CI
+
+on: pull_request
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install modules
+        working-directory: ./frontend
+        run: npm install
+      - name: Run frontend linter
+        working-directory: ./frontend
+        run: npm run test-all
+      - name: Build frontend
+        working-directory: ./frontend
+        run: npm run build
