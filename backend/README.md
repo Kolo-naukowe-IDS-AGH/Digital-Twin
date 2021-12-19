@@ -46,5 +46,13 @@ BE / kw_backend_setup
 (kw - Kamil Woźniak)
 ```
 
+Commit names:
+```shell
+git commit -m "BE - <your commit message>"
+
+e.x.
+git commit -m "BE - update readme"
+```
+
 ### Setting up a production server
 Work in progress
