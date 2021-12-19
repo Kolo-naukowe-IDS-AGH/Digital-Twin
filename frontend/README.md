@@ -5,10 +5,9 @@
 
 Digital-Twin frontend React UI with Typescript.
 
-
 ### Development and Build setup (locally)
 
-* development
+- development
 
 ```
 cd frontend
@@ -17,7 +16,7 @@ npm install
 npm run dev
 ```
 
-* build:
+- build:
 
 ```
 cd frontend
@@ -49,6 +48,7 @@ npm run test-all
 ```
 
 Switching branches:
+
 ```shell
 git merge master
 cd frontend
@@ -67,6 +67,7 @@ BE / kw_backend_setup
 ```
 
 Commit names:
+
 ```shell
 git commit -m "FE - <your commit message>"
 
@@ -75,4 +76,5 @@ git commit -m "FE - update readme"
 ```
 
 ### Setting up a production server
+
 Work in progress
