@@ -1,46 +1,80 @@
-# Getting Started with Create React App
+## Digital-Twin frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img src="https://img.shields.io/github/languages/top/Kolo-naukowe-IDS-AGH/Digital-Twin?color=green"></img>
+<img src="https://img.shields.io/github/last-commit/Kolo-naukowe-IDS-AGH/Digital-Twin"></img>
 
-## Available Scripts
+Digital-Twin frontend React UI with Typescript.
 
-In the project directory, you can run:
+### Development and Build setup (locally)
 
-### `npm start`
+- development
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+cd frontend
+cp .env.example .env
+npm install
+npm run dev
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- build:
 
-### `npm test`
+```
+cd frontend
+npm ci
+npm run test-all
+npm run build
+npm run start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Linting
 
-### `npm run build`
+To keep the code consistent, use the built-in prettier and eslint.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+Jetbrains IDE > Settings / Preferences > Plugins > Prettier
+Visual Studio Code > Plugins > Prettier
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Automatic code formatting
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+npm run format
+```
 
-### `npm run eject`
+Prettier, eslint and typescript code check
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+npm run test-all
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Switching branches:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```shell
+git merge master
+cd frontend
+npm ci
+git checkout -b FE/<your initials>_<branch description>
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Branch names:
 
-## Learn More
+```shell
+BE / <your initials>_<branch description>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+e.x.
+BE / kw_backend_setup
+(kw - Kamil Woźniak)
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Commit names:
+
+```shell
+git commit -m "FE - <your commit message>"
+
+e.x.
+git commit -m "FE - update readme"
+```
+
+### Setting up a production server
+
+Work in progress
