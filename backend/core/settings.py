@@ -9,24 +9,30 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
+import sys
+import environ
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env_file = 'local'
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+if 'test' in sys.argv:
+    env_file = 'test'
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v+_qx6&1$7n8n3z)vduvp30id3ux!-e752o+fz1w8#vvy2$ba0'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+env = environ.Env()
+environ.Env.read_env(
+    os.path.join(BASE_DIR, f'env/{env_file}.env')
+)
 
-ALLOWED_HOSTS = []
+ENVIRONMENT_TYPE = env('ENVIRONMENT_TYPE')
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env('DEBUG', cast=bool)
 
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS') + ['127.0.0.1', 'localhost']
+BASE_URL = env('BASE_URL')
 
 # Application definition
 
@@ -57,14 +63,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'core.urls'
 
-CORS_ORIGIN_WHITELIST = [
-    "http://*",
-    "http://*:3000",
-    "https://*:3000",
-    "https://*",
-    "http://localhost:3000",
-    "https://localhost:3000",
-]
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'solvbot-cache',
+    }
+}
+
+CORS_ORIGIN_WHITELIST = env.list('CORS_ORIGIN_WHITELIST')
 
 CORS_ALLOW_METHODS = [
     'DELETE',
@@ -120,13 +126,20 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
+if ENVIRONMENT_TYPE != 'test':
+    db_config = env.db_url('DB_URL')
+
+    DATABASES = {
+        'default': db_config,
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
