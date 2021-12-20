@@ -40,3 +40,38 @@
     ```shell
     pipenv run python manage.py runserver
     ``` 
+   
+
+Alternative way to create database (docker required):
+
+- Create `.env`: 
+   ```shell
+   cd ..
+   cp .env.example .env
+   ```
+  
+- Fill missing fields (you can use default values from example):
+
+   ```shell
+   DATABASE_PORT=5432
+   DATABASE_USER=postgres
+   DATABASE_PASSWORD=postgres
+   DATABASE_DB=digital_twin_db
+   ```
+  
+- Change your `local.env` create at step 5):
+   ```shell
+  DB_URL=postgres://postgres:postgres@localhost:5432/digital_twin_db
+   ```
+  
+- Run development `docker-compose`:
+
+   ```shell
+    docker-compose -f docker-compose.dev.yml up
+   ```
+
+- Check if postgres is running:
+
+   ```shell
+   docker container ls 
+   ```
