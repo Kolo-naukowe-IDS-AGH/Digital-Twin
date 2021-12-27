@@ -13,7 +13,7 @@ Digital-Twin frontend React UI with Typescript.
 cd frontend
 cp .env.example .env
 npm install
-npm run dev
+npm run start
 ```
 
 - build:
